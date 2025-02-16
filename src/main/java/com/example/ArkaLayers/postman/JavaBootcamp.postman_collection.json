@@ -1,0 +1,707 @@
+{
+	"info": {
+		"_postman_id": "9becc3a7-1e3f-48e9-8f48-4d86d16bd511",
+		"name": "JavaBootcamp",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32026386"
+	},
+	"item": [
+		{
+			"name": "ArkaLayer",
+			"item": [
+				{
+					"name": "Product",
+					"item": [
+						{
+							"name": "create",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Teclado Mecanico Logi\",\n    \"description\": \"Teclado de alta velocidad para jugadores profesionales\",\n    \"brand\": \"Logitech\",\n    \"attributes\": \"Velocidad lectura: 7000MB/s, Escritura: 5000MB/s\",\n    \"productPrice\": 259.99,\n    \"active\": true,\n    \"categoryIds\": [5]\n  }",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{JAVA_DOMAIN}}/api/v1/product",
+									"host": [
+										"{{JAVA_DOMAIN}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"product"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"SSD Samsung 980 Pro 2TB\",\n    \"description\": \"Unidad SSD NVMe PCIe 4.0 de alta velocidad con disipador térmico.\",\n    \"brand\": \"Samsung\",\n    \"attributes\": \"Capacidad: 1TB, Velocidad lectura: 7000MB/s, Escritura: 5000MB/s\",\n    \"productPrice\": 129.99,\n    \"active\": true,\n    \"categoryIds\": [3, 4]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{JAVA_DOMAIN}}/api/v1/product/4",
+									"host": [
+										"{{JAVA_DOMAIN}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"product",
+										"4"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getById",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{JAVA_DOMAIN}}/api/v1/product/4",
+									"host": [
+										"{{JAVA_DOMAIN}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"product",
+										"4"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getByCategoryId",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{JAVA_DOMAIN}}/api/v1/product/category/7",
+									"host": [
+										"{{JAVA_DOMAIN}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"product",
+										"category",
+										"7"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{JAVA_DOMAIN}}/api/v1/product/1",
+									"host": [
+										"{{JAVA_DOMAIN}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"product",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "User",
+					"item": [
+						{
+							"name": "create",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"John Doe\",\n  \"email\": \"johndoe@example.com\",\n  \"password\": \"securepassword\",\n  \"phone\": \"+123456789\",\n  \"active\": true,\n  \"rolesId\": [1]\n}\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{JAVA_DOMAIN}}/api/v1/user",
+									"host": [
+										"{{JAVA_DOMAIN}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"user"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"Felipe Alvarez\",\n  \"email\": \"felipea@example.com\",\n  \"password\": \"securepassword\",\n  \"phone\": \"+573218475615\",\n  \"active\": true,\n  \"rolesId\": [1]\n}\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{JAVA_DOMAIN}}/api/v1/user/1",
+									"host": [
+										"{{JAVA_DOMAIN}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"user",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getById",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{JAVA_DOMAIN}}/api/v1/user/1",
+									"host": [
+										"{{JAVA_DOMAIN}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"user",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{JAVA_DOMAIN}}/api/v1/user/1",
+									"host": [
+										"{{JAVA_DOMAIN}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"user",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Rol",
+					"item": [
+						{
+							"name": "create",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{JAVA_DOMAIN}}/api/v1/rol",
+									"host": [
+										"{{JAVA_DOMAIN}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"rol"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "{{JAVA_DOMAIN}}/api/v1/user/1",
+									"host": [
+										"{{JAVA_DOMAIN}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"user",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getById",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{JAVA_DOMAIN}}/api/v1/user/1",
+									"host": [
+										"{{JAVA_DOMAIN}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"user",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{JAVA_DOMAIN}}/api/v1/user/1",
+									"host": [
+										"{{JAVA_DOMAIN}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"user",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Category",
+					"item": [
+						{
+							"name": "create",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Periféricos\",\n    \"description\": \"Teclados, ratones, monitores y otros accesorios de entrada y salida.\"\n  }",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{JAVA_DOMAIN}}/api/v1/category",
+									"host": [
+										"{{JAVA_DOMAIN}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"category"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Almacenamiento\",\n    \"description\": \"Unidades de estado sólido (SSD) para almacenamiento de datos.\"\n  }",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{JAVA_DOMAIN}}/api/v1/category/4",
+									"host": [
+										"{{JAVA_DOMAIN}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"category",
+										"4"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getAll",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{JAVA_DOMAIN}}/api/v1/category",
+									"host": [
+										"{{JAVA_DOMAIN}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"category"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{JAVA_DOMAIN}}/api/v1/category/1",
+									"host": [
+										"{{JAVA_DOMAIN}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"category",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Order",
+					"item": [
+						{
+							"name": "create",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{JAVA_DOMAIN}}/api/v1/order/create/1",
+									"host": [
+										"{{JAVA_DOMAIN}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"order",
+										"create",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "{{JAVA_DOMAIN}}/api/v1/order/1",
+									"host": [
+										"{{JAVA_DOMAIN}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"order",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getById",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{JAVA_DOMAIN}}/api/v1/order/1",
+									"host": [
+										"{{JAVA_DOMAIN}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"order",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getByProductId",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{JAVA_DOMAIN}}/api/v1/order/product/5",
+									"host": [
+										"{{JAVA_DOMAIN}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"order",
+										"product",
+										"5"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{JAVA_DOMAIN}}/api/v1/order/1",
+									"host": [
+										"{{JAVA_DOMAIN}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"order",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getByDateRange",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{JAVA_DOMAIN}}/api/v1/order/date?startDate=2025-02-01&endDate=2025-02-16",
+									"host": [
+										"{{JAVA_DOMAIN}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"order",
+										"date"
+									],
+									"query": [
+										{
+											"key": "startDate",
+											"value": "2025-02-01"
+										},
+										{
+											"key": "endDate",
+											"value": "2025-02-16"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getByUserId",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{JAVA_DOMAIN}}/api/v1/order/user/2",
+									"host": [
+										"{{JAVA_DOMAIN}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"order",
+										"user",
+										"2"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Cart",
+					"item": [
+						{
+							"name": "create",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{JAVA_DOMAIN}}/api/v1/cart/create/1",
+									"host": [
+										"{{JAVA_DOMAIN}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"cart",
+										"create",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "insertProduct",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{JAVA_DOMAIN}}/api/v1/cart/user/1/product/5",
+									"host": [
+										"{{JAVA_DOMAIN}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"cart",
+										"user",
+										"1",
+										"product",
+										"5"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getByUserId",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{JAVA_DOMAIN}}/api/v1/cart/user/1",
+									"host": [
+										"{{JAVA_DOMAIN}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"cart",
+										"user",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "abandonedCarts",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{JAVA_DOMAIN}}/api/v1/cart/user/1",
+									"host": [
+										"{{JAVA_DOMAIN}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"cart",
+										"user",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{JAVA_DOMAIN}}/api/v1/cart/1",
+									"host": [
+										"{{JAVA_DOMAIN}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"cart",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Payment",
+					"item": []
+				}
+			]
+		}
+	]
+}
