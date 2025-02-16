@@ -16,8 +16,6 @@ import java.util.List;
 @NoArgsConstructor
 public class OrderResponseDTO {
   private double total;
-  private String currency;
-  private String notes;
   private String status;
   private UserDTO userDto;
   //private List<PaymentDTO> paymentDTOList;

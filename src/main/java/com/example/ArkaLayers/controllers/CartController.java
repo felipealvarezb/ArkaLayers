@@ -37,9 +37,16 @@ public class CartController {
   }
 
   @PostMapping("/create/{userId}")
-  public ResponseEntity<CartResponseDTO> create(@Validated @RequestBody Long userId){
+  public ResponseEntity<CartResponseDTO> create( @PathVariable Long userId){
     Cart savedCart = cartService.createCart(userId);
     CartResponseDTO cartResponseDTO = cartMapper.cartToCartResponseDto(savedCart);
+    return ResponseEntity.ok().body(cartResponseDTO);
+  }
+
+  @PostMapping("/user/{userId}/product/{productId}")
+  public ResponseEntity<CartResponseDTO> insertItem(@PathVariable Long userId, @PathVariable Long productId) {
+    Cart cart = cartService.insertItem(userId, productId);
+    CartResponseDTO cartResponseDTO = cartMapper.cartToCartResponseDto(cart);
     return ResponseEntity.ok().body(cartResponseDTO);
   }
 

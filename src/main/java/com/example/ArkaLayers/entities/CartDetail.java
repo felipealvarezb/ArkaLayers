@@ -21,14 +21,8 @@ public class CartDetail {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  @Column(name = "sub_total", nullable = false)
-  private double subTotal;
-
   @Column(nullable = false)
   private int quantity;
-
-  @Column(name = "product_price", nullable = false)
-  private double productPrice;
 
   @ManyToOne
   @JoinColumn(name = "cart_id", nullable = false)

@@ -26,12 +26,6 @@ public class Order {
   private double total;
 
   @Column(nullable = false)
-  private String currency;
-
-  @Column(nullable = false)
-  private String notes;
-
-  @Column(nullable = false)
   private String status;
 
   @ManyToOne

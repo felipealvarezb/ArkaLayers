@@ -31,8 +31,6 @@ public class OrderMapperImpl implements OrderMapper {
   public Order orderDtoToOrder(OrderDTO orderDTO) {
     Order order = new Order();
     order.setTotal(orderDTO.getTotal());
-    order.setCurrency(orderDTO.getCurrency());
-    order.setNotes(orderDTO.getNotes());
     order.setStatus(orderDTO.getStatus());
     order.setUser(userRepository.findById(orderDTO.getUserId())
             .orElseThrow(() -> new EntityNotFoundException("User not found")
@@ -57,8 +55,6 @@ public class OrderMapperImpl implements OrderMapper {
   public OrderResponseDTO orderToOrderResponseDTO(Order order) {
     OrderResponseDTO orderResponseDTO = new OrderResponseDTO();
     orderResponseDTO.setTotal(order.getTotal());
-    orderResponseDTO.setCurrency(order.getCurrency());
-    orderResponseDTO.setNotes(order.getNotes());
     orderResponseDTO.setStatus(order.getStatus());
     orderResponseDTO.setUserDto(new UserDTO(
             order.getUser().getName(),

@@ -20,6 +20,12 @@ public class OrderDetail {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
+  @Column(nullable = false)
+  private int quantity;
+
+  @Column(nullable = false)
+  private double subtotal;
+
   @ManyToOne
   @JoinColumn(name = "order_id", nullable = false)
   private Order order;

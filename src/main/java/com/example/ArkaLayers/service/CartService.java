@@ -10,6 +10,8 @@ public interface CartService {
 
   Cart createCart(Long userId);
 
+  Cart insertItem(Long userId, Long productId);
+
   Cart getCartByUserId(Long userId);
 
   String deleteCartByUserId(Long userId);

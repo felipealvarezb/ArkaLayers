@@ -17,14 +17,6 @@ public class OrderDTO {
   @NotNull(message = "Order total is required")
   private double total;
 
-  @NotBlank(message = "Order currency is required")
-  @NotNull
-  private String currency;
-
-  @NotBlank(message = "Order notes is required")
-  @NotNull
-  private String notes;
-
   @NotBlank(message = "Order status is required")
   @NotNull
   private String status;

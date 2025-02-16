@@ -12,6 +12,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -34,8 +35,12 @@ public class OrderController {
   @GetMapping("/date")
   public ResponseEntity<List<OrderResponseDTO>> getOrderByDateRange(
           @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
-          @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)LocalDate endDate) {
-    List<Order> orders = orderService.findOrdersByDateRange(startDate, endDate);
+          @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {
+
+    LocalDateTime startDateTime = startDate.atStartOfDay();
+    LocalDateTime endDateTime = endDate.atTime(23, 59, 59);
+
+    List<Order> orders = orderService.findOrdersByDateRange(startDateTime, endDateTime);
     List<OrderResponseDTO> orderResponseDTOS = orderMapper.listOrderToListOrderResponseDto(orders);
     return ResponseEntity.ok().body(orderResponseDTOS);
   }
@@ -47,10 +52,9 @@ public class OrderController {
     return ResponseEntity.ok().body(orderResponseDTOS);
   }
 
-  @PostMapping
-  public ResponseEntity<OrderResponseDTO> create(@Validated @RequestBody OrderDTO orderDto) {
-    Order order = orderMapper.orderDtoToOrder(orderDto);
-    Order savedOrder = orderService.createOrder(order);
+  @PostMapping("/create/{userId}")
+  public ResponseEntity<OrderResponseDTO> create(@PathVariable Long userId) {
+    Order savedOrder = orderService.createOrder(userId);
     OrderResponseDTO orderResponseDTO = orderMapper.orderToOrderResponseDTO(savedOrder);
     return ResponseEntity.ok().body(orderResponseDTO);
   }

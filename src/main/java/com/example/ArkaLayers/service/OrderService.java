@@ -10,11 +10,11 @@ public interface OrderService {
 
   List<Order> findOrdersByProductId(Long productId);
 
-  List<Order> findOrdersByDateRange(LocalDate startDate, LocalDate endDate);
+  List<Order> findOrdersByDateRange(LocalDateTime startDate, LocalDateTime endDate);
 
   List<Order> findOrdersByUserId(Long userId);
 
-  Order createOrder(Order order);
+  Order createOrder(Long userId);
 
   Order updateOrder(Long orderId, Order order);
 
