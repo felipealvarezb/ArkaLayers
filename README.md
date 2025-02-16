@@ -151,7 +151,7 @@ public class GlobalExceptionHandler {
 Iniciálmente el método createOrder en el OrderService realizaba demasiadas tareas, hacia consultas, calculaba el total, limpiaba el carrito de compras entre otras cosas
 Así se veía:
 
-```
+```java
 @Override
   public Order createOrder(Long userId) {
     User existingUser = userRepository.findById(userId)
