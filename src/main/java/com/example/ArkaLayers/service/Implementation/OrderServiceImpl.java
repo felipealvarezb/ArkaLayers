@@ -55,35 +55,19 @@ public class OrderServiceImpl implements OrderService {
     Cart userCart = cartRepository.findByUserId(userId)
             .orElseThrow(() -> new EntityNotFoundException("User cart not found"));
 
-    List<CartDetail> cartDetails = userCart.getCartDetails();
-
-    if (cartDetails.isEmpty()) {
-      throw new IllegalStateException("Cart is empty");
-    }
+    validateCart(userCart);
 
     Order order = new Order();
     order.setUser(existingUser);
     order.setStatus("Pending");
     order.setOrderDetails(new ArrayList<>());
 
-    double totalOrder = 0.0;
-    for (CartDetail cartDetail : cartDetails) {
-      OrderDetail orderDetail = new OrderDetail();
-      orderDetail.setProduct(cartDetail.getProduct());
-      orderDetail.setOrder(order);
-      orderDetail.setQuantity(cartDetail.getQuantity());
-      orderDetail.setSubtotal(cartDetail.getProduct().getProductPrice() * cartDetail.getQuantity());
-      order.getOrderDetails().add(orderDetail);
-      totalOrder += orderDetail.getSubtotal();
-    }
+    double totalOrder = calculateTotalOrder(userCart, order);
 
     order.setTotal(totalOrder);
-
     order = orderRepository.save(order);
 
-    cartDetailRepository.deleteByCartId(userCart.getId());
-    userCart.setCartDetails(new ArrayList<>());
-    cartRepository.save(userCart);
+    clearUserCart(userCart);
 
     return order;
   }
@@ -99,5 +83,31 @@ public class OrderServiceImpl implements OrderService {
             .orElseThrow(() -> new EntityNotFoundException("Order not found"));
     orderRepository.delete(existingOrder);
     return "Order deleted successfully";
+  }
+
+  private double calculateTotalOrder(Cart cart, Order order) {
+    double totalOrder = 0.0;
+    for (CartDetail cartDetail : cart.getCartDetails()) {
+      OrderDetail orderDetail = new OrderDetail();
+      orderDetail.setProduct(cartDetail.getProduct());
+      orderDetail.setOrder(order);
+      orderDetail.setQuantity(cartDetail.getQuantity());
+      orderDetail.setSubtotal(cartDetail.getProduct().getProductPrice() * cartDetail.getQuantity());
+      order.getOrderDetails().add(orderDetail);
+      totalOrder += orderDetail.getSubtotal();
+    }
+    return totalOrder;
+  }
+
+  private void validateCart(Cart cart) {
+    if (cart.getCartDetails().isEmpty()) {
+      throw new IllegalStateException("Cart is empty");
+    }
+  }
+
+  private void clearUserCart(Cart cart) {
+    cartDetailRepository.deleteByCartId(cart.getId());
+    cart.setCartDetails(new ArrayList<>());
+    cartRepository.save(cart);
   }
 }
