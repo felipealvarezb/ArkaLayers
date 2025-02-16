@@ -140,3 +140,134 @@ public class GlobalExceptionHandler {
 ```
 
 
+
+
+
+
+## Single Responsability CreateOrder
+
+### 🔹 Antes de aplicar SR
+
+Iniciálmente el método createOrder en el OrderService realizaba demasiadas tareas, hacia consultas, calculaba el total, limpiaba el carrito de compras entre otras cosas
+Así se veía:
+
+```
+@Override
+  public Order createOrder(Long userId) {
+    User existingUser = userRepository.findById(userId)
+            .orElseThrow(() -> new EntityNotFoundException("User not found"));
+
+    Cart userCart = cartRepository.findByUserId(userId)
+            .orElseThrow(() -> new EntityNotFoundException("User cart not found"));
+
+    List<CartDetail> cartDetails = userCart.getCartDetails();
+
+    if (cartDetails.isEmpty()) {
+      throw new IllegalStateException("Cart is empty");
+    }
+
+    Order order = new Order();
+    order.setUser(existingUser);
+    order.setStatus("Pending");
+    order.setOrderDetails(new ArrayList<>());
+
+    double totalOrder = 0.0;
+    for (CartDetail cartDetail : cartDetails) {
+      OrderDetail orderDetail = new OrderDetail();
+      orderDetail.setProduct(cartDetail.getProduct());
+      orderDetail.setOrder(order);
+      orderDetail.setQuantity(cartDetail.getQuantity());
+      orderDetail.setSubtotal(cartDetail.getProduct().getProductPrice() * cartDetail.getQuantity());
+      order.getOrderDetails().add(orderDetail);
+      totalOrder += orderDetail.getSubtotal();
+    }
+
+    order.setTotal(totalOrder);
+
+    order = orderRepository.save(order);
+
+    cartDetailRepository.deleteByCartId(userCart.getId());
+    userCart.setCartDetails(new ArrayList<>());
+    cartRepository.save(userCart);
+
+    return order;
+  }
+```
+
+Después de separar la lógica, dividir el código en funciónes que solo realizan una única responsabilidad, ya solo tendremos que modificar una función y no el método completo de 
+crear una orden. 
+
+🔹 Aplicando Single Responsability 
+
+```java
+@Override
+  public Order createOrder(Long userId) {
+    User existingUser = userRepository.findById(userId)
+            .orElseThrow(() -> new EntityNotFoundException("User not found"));
+
+    Cart userCart = cartRepository.findByUserId(userId)
+            .orElseThrow(() -> new EntityNotFoundException("User cart not found"));
+
+    validateCart(userCart);
+
+    Order order = new Order();
+    order.setUser(existingUser);
+    order.setStatus("Pending");
+    order.setOrderDetails(new ArrayList<>());
+
+    double totalOrder = calculateTotalOrder(userCart, order);
+
+    order.setTotal(totalOrder);
+    order = orderRepository.save(order);
+
+    clearUserCart(userCart);
+
+    return order;
+  }
+
+  private double calculateTotalOrder(Cart cart, Order order) {
+    double totalOrder = 0.0;
+    for (CartDetail cartDetail : cart.getCartDetails()) {
+      OrderDetail orderDetail = new OrderDetail();
+      orderDetail.setProduct(cartDetail.getProduct());
+      orderDetail.setOrder(order);
+      orderDetail.setQuantity(cartDetail.getQuantity());
+      orderDetail.setSubtotal(cartDetail.getProduct().getProductPrice() * cartDetail.getQuantity());
+      order.getOrderDetails().add(orderDetail);
+      totalOrder += orderDetail.getSubtotal();
+    }
+    return totalOrder;
+  }
+
+  private void validateCart(Cart cart) {
+    if (cart.getCartDetails().isEmpty()) {
+      throw new IllegalStateException("Cart is empty");
+    }
+  }
+
+  private void clearUserCart(Cart cart) {
+    cartDetailRepository.deleteByCartId(cart.getId());
+    cart.setCartDetails(new ArrayList<>());
+    cartRepository.save(cart);
+  }
+
+```
+
+Si en algún momento se tiene que cambiar la manera en la que se calcula el total, no se modifica el metodo createOrder sino que se modifica el calculateTotalOrder
+cada función asume una única responsabilidad. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
